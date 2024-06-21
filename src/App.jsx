@@ -3,17 +3,20 @@ import GameBoard from "./components/GameBoard.jsx";
 import Log from "./components/Log.jsx";
 import {useState} from "react";
 
+function derivedCurPlayer(gameLogs) {
+  let curPlayer = 'X';
+  if(gameLogs.length>0 && gameLogs[0].player==='X')  curPlayer = 'O';
+  return curPlayer;
+}
+
 function App() {
-  const [curPlayer, setCurPlayer] = useState('X');
   const [gameLogs, setGameLogs] = useState([]);
 
+  const curPlayer = derivedCurPlayer(gameLogs);
+
   function handleCellSelected(row, col) {
-    setCurPlayer((curPlayer)=>curPlayer==='X'?'O':'X');
     setGameLogs((gameLogs)=>{
-      let curPlayer = 'X';
-      if(gameLogs.length>0 && gameLogs[0].player==='X') {
-        curPlayer = 'O';
-      }
+      let curPlayer = derivedCurPlayer(gameLogs)
       const newGameLogs = [{cell: {row: row, col: col}, player: curPlayer}, ...gameLogs];
       return newGameLogs;
     });
