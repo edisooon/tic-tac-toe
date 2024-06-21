@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import { useState } from "react";
 
 const initialGameBoard = [
   [null, null, null],
@@ -6,11 +6,11 @@ const initialGameBoard = [
   [null, null, null],
 ];
 
-export default function GameBoard({onCellSelected, gameLogs}) {
+export default function GameBoard({ onCellSelected, gameLogs }) {
   let gameBoard = initialGameBoard;
-  for(const gameLog of gameLogs) {
-    const {cell, player} = gameLog;
-    const {row, col} = cell;
+  for (const gameLog of gameLogs) {
+    const { cell, player } = gameLog;
+    const { row, col } = cell;
     gameBoard[row][col] = player;
   }
 
@@ -21,7 +21,12 @@ export default function GameBoard({onCellSelected, gameLogs}) {
           <ol>
             {row.map((playerSymbol, colIndex) => (
               <li key={colIndex}>
-                <button onClick={()=>onCellSelected(rowIndex, colIndex)}>{playerSymbol}</button>
+                <button
+                  onClick={() => onCellSelected(rowIndex, colIndex)}
+                  disabled={playerSymbol !== null}
+                >
+                  {playerSymbol}
+                </button>
               </li>
             ))}
           </ol>
