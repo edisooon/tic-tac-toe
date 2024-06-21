@@ -23,7 +23,7 @@ function App() {
 
   const curPlayer = derivedCurPlayer(gameLogs);
 
-  let gameBoard = initialGameBoard;
+  let gameBoard = initialGameBoard.map((row)=>[...row]);
   for (const gameLog of gameLogs) {
     const { cell, player } = gameLog;
     const { row, col } = cell;
@@ -53,6 +53,10 @@ function App() {
     });
   }
 
+  function handleRestart() {
+    setGameLogs([]);
+  }
+
   return (
     <main>
       <div id="game-container">
@@ -61,9 +65,9 @@ function App() {
           <Player name="Player 2" symbol="O" isActive={curPlayer === "O"} />
         </ol>
         <GameBoard onCellSelected={handleCellSelected} gameBoard={gameBoard} />
-        {(winner||isDraw) && <GameOver winner={winner}/>}
+        {(winner||isDraw) && <GameOver winner={winner} onRestart={handleRestart} />}
       </div>
-      <Log gameLogs={gameLogs} />
+      <Log gameLogs={gameLogs}/>
     </main>
   );
 }
