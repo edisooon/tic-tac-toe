@@ -6,16 +6,12 @@ const initialGameBoard = [
   [null, null, null],
 ];
 
-export default function GameBoard({onChangePlayer, curPlayer}) {
-  const [gameBoard, setGameBoard] = useState(initialGameBoard);
-
-  function handleCellSelected(rowIndex, colIndex) {
-    setGameBoard((prevGameBoard) => {
-      const newGameBoard = prevGameBoard.map((row)=>row.slice());
-      newGameBoard[rowIndex][colIndex] = curPlayer;
-      return newGameBoard;
-    });
-    onChangePlayer();
+export default function GameBoard({onCellSelected, gameLogs}) {
+  let gameBoard = initialGameBoard;
+  for(const gameLog of gameLogs) {
+    const {cell, player} = gameLog;
+    const {row, col} = cell;
+    gameBoard[row][col] = player;
   }
 
   return (
@@ -25,7 +21,7 @@ export default function GameBoard({onChangePlayer, curPlayer}) {
           <ol>
             {row.map((playerSymbol, colIndex) => (
               <li key={colIndex}>
-                <button onClick={()=>handleCellSelected(rowIndex, colIndex)}>{playerSymbol}</button>
+                <button onClick={()=>onCellSelected(rowIndex, colIndex)}>{playerSymbol}</button>
               </li>
             ))}
           </ol>
