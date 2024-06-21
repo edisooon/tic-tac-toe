@@ -11,13 +11,14 @@ const initialGameBoard = [
   [null, null, null],
 ];
 
-function derivedCurPlayer(gameLogs) {
-  let curPlayer = "X";
-  if (gameLogs.length > 0 && gameLogs[0].player === "X") curPlayer = "O";
-  return curPlayer;
-}
-
 function App() {
+
+  function derivedCurPlayer(gameLogs) {
+    let curPlayer = "X";
+    if (gameLogs.length > 0 && gameLogs[0].player === "X") curPlayer = "O";
+    return curPlayer;
+  }
+
   const [gameLogs, setGameLogs] = useState([]);
 
   const curPlayer = derivedCurPlayer(gameLogs);
