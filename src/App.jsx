@@ -1,5 +1,6 @@
 import Player from "./components/Player.jsx";
 import GameBoard from "./components/GameBoard.jsx";
+import Log from "./components/Log.jsx";
 import {useState} from "react";
 
 function App() {
@@ -25,8 +26,9 @@ function App() {
           <Player name="Player 1" symbol="X" isActive={curPlayer==='X'}/>
           <Player name="Player 2" symbol="O" isActive={curPlayer==='O'}/>
         </ol>
-        <GameBoard onCellSelected={handleCellSelected} gameLogs={gameLogs}/>
+        <GameBoard onCellSelected={handleCellSelected} gameLogs={gameLogs} />
       </div>
+      <Log gameLogs={gameLogs}/>
     </main>
   );
 }
