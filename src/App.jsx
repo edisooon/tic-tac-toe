@@ -1,6 +1,7 @@
 import Player from "./components/Player.jsx";
 import GameBoard from "./components/GameBoard.jsx";
 import Log from "./components/Log.jsx";
+import GameOver from "./components/GameOver.jsx";
 import { useState } from "react";
 import { WINNING_COMBINATIONS } from "./winning-combinations.js";
 
@@ -38,6 +39,8 @@ function App() {
     }
   }
 
+  const isDraw = gameLogs.length===9 && !winner;
+
   function handleCellSelected(row, col) {
     setGameLogs((gameLogs) => {
       let curPlayer = derivedCurPlayer(gameLogs);
@@ -57,7 +60,7 @@ function App() {
           <Player name="Player 2" symbol="O" isActive={curPlayer === "O"} />
         </ol>
         <GameBoard onCellSelected={handleCellSelected} gameBoard={gameBoard} />
-        <p>{winner}</p>
+        {(winner||isDraw) && <GameOver winner={winner}/>}
       </div>
       <Log gameLogs={gameLogs} />
     </main>
