@@ -1,19 +1,5 @@
-import { useState } from "react";
 
-const initialGameBoard = [
-  [null, null, null],
-  [null, null, null],
-  [null, null, null],
-];
-
-export default function GameBoard({ onCellSelected, gameLogs }) {
-  let gameBoard = initialGameBoard;
-  for (const gameLog of gameLogs) {
-    const { cell, player } = gameLog;
-    const { row, col } = cell;
-    gameBoard[row][col] = player;
-  }
-
+export default function GameBoard({ onCellSelected, gameBoard }) {
   return (
     <ol id="game-board">
       {gameBoard.map((row, rowIndex) => (
