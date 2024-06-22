@@ -70,12 +70,20 @@ function App() {
     setGameLogs([]);
   }
 
+  function handleNameSaved(name, symbol) {
+    setPlayers((players)=>(
+      {...players,
+      [symbol]: name,
+      }
+    ));
+  }
+
   return (
     <main>
       <div id="game-container">
         <ol id="players" className="highlight-player">
-          <Player name={players['X']} symbol="X" isActive={curPlayer === "X"} />
-          <Player name={players['O']} symbol="O" isActive={curPlayer === "O"} />
+          <Player name={INITIAL_PLAYER['X']} symbol="X" isActive={curPlayer === "X"} onNameSaved={handleNameSaved}/>
+          <Player name={INITIAL_PLAYER['O']} symbol="O" isActive={curPlayer === "O"} onNameSaved={handleNameSaved}/>
         </ol>
         <GameBoard onCellSelected={handleCellSelected} gameBoard={gameBoard} />
         {(winner || isDraw) && (
